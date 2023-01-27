@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page service{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div>
+        <h1>Dashboard</h1>
+        {% if app.user != null %}
+            <div>
+                service numero {{ service.id }}
+            </div>
+            <div>
+                nom du service: {{ service.name }}
+            </div>
+            <div>
+                description du service: {{ service.description }}
+            </div>
+        {% endif %}
+        {% if app.user == null %}
+            <div>veuillez vous identifier</div>
+            <a href="{{ path('app_login') }}">page de login</a>
+        {% endif %}
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('delete_service', {'id': service.id}) }}">supprimer le service</a>
+        {% endif %}
+    </div>
+{% endblock %}

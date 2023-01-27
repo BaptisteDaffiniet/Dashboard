@@ -1,0 +1,90 @@
+h1 {
+    width: 600px;
+    height: 50px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.maj_div {
+    width: 28%;
+    height: 430px;
+    margin: 7% auto 0 auto;
+    align-content: center;
+    background: darkgrey;
+    border-radius: 25px;
+}
+
+.logo {
+    text-align: center;
+    font: small-caps bold 24px/1 sans-serif;
+    margin-top: 1%;
+}
+
+.tier_connection {
+    text-align: center;
+    align-items: center;
+    display: inline-block;
+    margin: auto;
+    margin-bottom: 50px;
+}
+
+.auth_google, .auth_google:visited, .auth_google:active {
+    color: black;
+    width: 80%;
+    border-radius: 5px;
+    background-color:   #c0392b  ; 
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-bottom: 2%;
+}
+
+.auth_facebook {
+    width: 80%;
+    border-radius: 5px;
+    background-color: #4267B2;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.user_account_link {
+    width: 60%;
+    height: 150px;
+    margin: auto;
+    margin-bottom: 50px;
+    background: grey;
+    left: auto;
+    font:bold;
+    right: auto;
+    text-align: center;
+}
+
+.no_account_link {
+    width: 50%;
+    border-radius: 5px;
+    background-color: white;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: auto 20% auto;
+} 
+
+.info_box {
+    text-align: center;
+    align-content: center;
+    margin: auto;
+    margin-top: 10px;
+}

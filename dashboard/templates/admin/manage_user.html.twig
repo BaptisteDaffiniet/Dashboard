@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    page management utilisateur
+{% endblock %}
+
+{% block body %}
+    <div>
+        informations de l'utilisateur
+    </div>
+    <div>nom d'utilisateur: {{ user.username }}</div>
+    <div>id: {{ user.id }}</div>
+    <div>email: {{ user.mail }}</div>
+    <div> connexion par google:
+        {% if user.google_auth == 1 %}
+            oui
+        {% else %}
+            non
+        {% endif %}
+    </div>
+    <div> connexion par facebook:
+        {% if user.facebook_auth == 1 %}
+            oui
+        {% else %}
+            non
+        {% endif %}
+    </div>
+    <a href="{{ path('delete_user', {'id': user.id}) }}">supprimer l'utilisateur</a>
+{% endblock %}

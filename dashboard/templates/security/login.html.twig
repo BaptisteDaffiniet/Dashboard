@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('css/landing.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+    <div class="logo">
+        <a> Dashboard </a>
+    </div>
+    <div class="maj_div">
+
+        <form method="post">
+            {% if error %}
+                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+
+            {% if app.user %}
+                <div class="mb-3">
+                    You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+                </div>
+            {% endif %}
+
+
+
+            <div class="user_account_link">
+                <a> Se connecter avec ses identifiants </a>
+                <div class="info_box">
+                    <label for="inputUsername"></label>
+                    <input type="text" value="{{ last_username }}" name="username" id="inputUsername"
+                           class="form-control"
+                           required
+                           autofocus placeholder="username">
+                </div>
+                <div class="info_box">
+                    <label for="inputPassword"></label>
+                    <input type="password" name="password" id="inputPassword" class="form-control" required
+                           placeholder="password">
+                </div>
+                <div class="info_box">
+                    <input type="hidden" name="_csrf_token"
+                           value="{{ csrf_token('authenticate') }}"
+                    >
+                    <button class="btn btn-lg btn-primary" type="submit">
+                        connexion
+                    </button>
+                </div>
+            </div>
+        </form>
+
+            <div class="tier_connection">
+                <div class="auth_google">
+                    <a href="{{ path('google_connect') }}" style="text-decoration:none; color:white">
+                        <img src="{{ asset('pictures/logo_google.png') }}" alt="authentification google"
+                             style="width: 25px; height: 25px; align-content: right;">
+                    
+                        Connexion via Google
+                    </a>
+                </div>
+                <div class="auth_facebook" >
+                    <a href="{{ path('facebook_connect') }}" style="text-decoration:none; color:white">
+                        <img src="{{ asset('pictures/facebook_logo.png') }}" alt="authentification google"
+                             style="width: 30px; height: 30px; align-content: right">
+                        Connexion via Facebook
+
+                    </a>
+                </div>
+            </div>
+
+        <div class="no_account_link">
+            <a href="{{ path('register') }}" style="text-decoration:none; color:black">Créer un compte</a>
+        </div>
+    </div>
+{% endblock %}

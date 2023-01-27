@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page service{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div>
+        {% if app.user != null %}
+            {% if services != null %}
+                <table class="table">
+                    <tr>
+                        <th>Nom du service</th>
+                        <th>Contenu</th>
+                        <th></th>
+                    </tr>
+                    {% for service in services %}
+                        <tr>
+                            <td>{{ service.name }}</td>
+                            <td>{{ service.description }}</td>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <td>
+                                    <a href="{{ path('manage_service', {'id': service.id}) }}">gérer le service</a>
+                                </td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+                aucun service enregistré pour le moment, veuillez en ajouter 1.
+            {% endif %}
+        {% endif %}
+        {% if app.user == null %}
+            <div>veuillez vous identifier</div>
+            <a href="{{ path('app_login') }}">page de login</a>
+        {% endif %}
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('create_service') }}">créer un service</a>
+        {% endif %}
+    </div>
+{% endblock %}

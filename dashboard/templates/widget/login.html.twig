@@ -1,0 +1,381 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page Widgets{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('css/widget_look.css') }}" type="text/css" rel="stylesheet">
+{% endblock %}
+{% block javascripts %}
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        function weathercall($town, $index) {
+            $.ajax(
+                {
+                    type: 'POST',
+                    url: '/ajax/weather',
+                    data: {
+                        city: $town
+                    },
+                    dataType: "json",
+                    async: true,
+                    success: function (response) {
+                        $('#town_name-' + $index).html(response['city']);
+                        $('#temp-' + $index).html(response['temperature']);
+                        $('#description-' + $index).html(response['description']);
+                    },
+                    error: function (response, status, error) {
+                        alert("weather error: " + error);
+                    }
+                }
+            );
+        }
+
+        function steamappnewscall($gameid, $index) {
+            $.ajax(
+                {
+                    type: 'POST',
+                    url: '/ajax/steamapp',
+                    data: {
+                        gameid: $gameid
+                    },
+                    dataType: "json",
+                    async: true,
+                    success: function (response) {
+                        $('#steamapp-title-' + $index).html(response['title']);
+                        $('#steamapp-author-' + $index).html(response['author']);
+                        $('#steamapp-content-' + $index).html(response['content']);
+                    },
+                    error: function (response, status, error) {
+                        alert("steamappnews error: " + error);
+                    }
+                }
+            );
+        }
+
+        function steamprofilecall($profileid, $index) {
+            $.ajax(
+                {
+                    type: 'POST',
+                    url: '/ajax/steamprofile',
+                    data: {
+                        profileid: $profileid
+                    },
+                    dataType: "json",
+                    success: function (response) {
+                        $('#steamprofile-name-' + $index).html(response['profilename']);
+                        $('#steamprofile-id-' + $index).html(response['steamid']);
+                        $('#steamprofile-link-' + $index).attr("href", response['url']);
+                        $('#steamprofile-avatar-' + $index).attr("src", response['avatar']);
+                    },
+                    error: function (response, status, error) {
+                        alert("steamprofile error: " + error);
+                    }
+                }
+            );
+        }
+
+        function steamrecentgamescall($steamid, $index) {
+            $.ajax(
+                {
+                    type: 'POST',
+                    url: '/ajax/steamrecentgames',
+                    data: {
+                        steamid: $steamid,
+                    },
+                    dataType: "json",
+                    success: function (response) {
+                        $('#steamrecentgame-name-' + $index).html(response['game_name']);
+                        $('#steamrecentgame-id-' + $index).html(response['game_id']);
+                        $('#steamrecentgame-playtime-' + $index).html(response['play_time']);
+                    },
+                    error: function (response, status, error) {
+                        alert("steamrecentgames error: " + error);
+                    }
+                }
+            );
+        }
+
+        function deviseconversioncall($target, $format, $quantity, $index) {
+            $.ajax(
+                {
+                    type: 'POST',
+                    url: '/ajax/deviseconversion',
+                    data: {
+                        target: $target,
+                        format: $format,
+                        quantity: $quantity
+                    },
+                    dataType: "json",
+                    success: function (response) {
+                        $('#deviseconversion-amount-' + $index).html(response['amount']);
+                    },
+                    error: function (response, status, error) {
+                        alert("deviseconversion error: " + error);
+                    },
+                }
+            );
+        }
+
+        function youtubevideocall($videoid, $index) {
+            $.ajax(
+                {
+                    type: 'POST',
+                    url: '/ajax/youtubevideo',
+                    data: {
+                        videoid: $videoid,
+                    },
+                    dataType: "json",
+                    success: function (response) {
+                        $('#youtubevideo-title-'+$index).html(response['title']);
+                        $('#youtubevideo-description-'+$index).html(response['description']);
+                        $('#youtubevideo-view-'+$index).html(response['views']);
+                        $('#youtubevideo-like-'+$index).html(response['likes']);
+                    },
+                    error: function (response, status, error) {
+                        alert("youtubevideo error: " + error);
+                    }
+                }
+            );
+        }
+    </script>
+{% endblock %}
+{% block body %}
+    <div class="main_div">
+        <div class="weather_class">
+            <div class="title">
+                widget weather
+            </div>
+            {% for weather in weathers %}
+                <div id="div_widget" class="weather_display">
+                    <div>
+                        <div class="sub_cat">
+                            ville choisie:
+                        </div>
+                        <div id="town_name-{{ loop.index }}"></div>
+                    </div>
+                    <div>
+                        <div class="sub_cat">
+                            température:
+                        </div>
+                        <div id="temp-{{ loop.index }}"></div>
+                        degrès Celsius
+                    </div>
+                    <div>
+                        <div class="sub_cat">
+                            description:
+                        </div>
+                        <div id="description-{{ loop.index }}"></div>
+                    </div>
+                    <a href="{{ path('delete_weather_widget', {'id': weather.id_widget}) }}">delete widget</a>
+                </div>
+                <script>weathercall('{{ weather.town }}', {{ loop.index }})</script>
+                <script>setInterval(function () {
+                        weathercall('{{ weather.town }}', {{ loop.index }})
+                    }, {{ weather.timer }}* 1000
+                    )
+                </script>
+            {% endfor %}
+        </div>
+
+        <div class="steam_app_new_class">
+            <div class="title">
+                widget steam app news
+            </div>
+            {% for steamappnew in steamappnews %}
+                <div id="div_widget" class="steam_app_new_display">
+                    <div>
+                        <div class="sub_cat">
+                        nom du jeu: 
+                        </div>
+                        {{ steamappnew.gamename }}
+                    </div>
+                    <div>
+                        <div class="sub_cat">                    
+                        titre de la mise a jour:
+                        </div>
+                        <div id="steamapp-title-{{ loop.index }}"></div>
+                    </div>
+                    <div>
+                    <div class="sub_cat">
+                    auteur:
+                    </div>
+                        <div id="steamapp-author-{{ loop.index }}"></div>
+                    </div>
+                    <div>
+                        <div class="sub_cat">
+                        contenu:
+                        </div>
+                        <div id="steamapp-content-{{ loop.index }}"></div>
+                    </div>
+                    <a href="{{ path('delete_steamnews_widget', {'id': steamappnew.id_widget}) }}">delete widget</a>
+                </div>
+                <script>steamappnewscall('{{ steamappnew.game_id }}', {{ loop.index }})</script>
+                <script>setInterval(function () {
+                        steamappnewscall('{{ steamappnew.game_id }}', {{ loop.index }})
+                    }, {{ steamappnew.timer }} * 1000
+                    )</script>
+            {% endfor %}
+        </div>
+
+        <div class="steam_profile_class">
+            <div class="title">
+                widget steam profile
+            </div>
+            {% for steamprofile in steamprofiles %}
+                <div id="div_widget" class="steam_profile_display">
+                    <div>
+                        <img src="#" alt="avatar" id="steamprofile-avatar-{{ loop.index }}"/>
+                    </div>
+                    <div>
+                        <div class="sub_cat">
+                        nom du profil
+                        </div>
+                        <div id="steamprofile-name-{{ loop.index }}"></div>
+                    </div>
+                    <div>
+                        <div class="sub_cat">
+                        steam 64ID:
+                        </div>
+                        <div id="steamprofile-id-{{ loop.index }}"></div>
+                    </div>
+                    <div>
+                        <a href="#" id="steamprofile-link-{{ loop.index }}">lien du profil</a>
+                    </div>
+                    <a href="{{ path('delete_steamprofile_widget', {'id': steamprofile.id_widget}) }}">delete widget</a>
+                </div>
+                <script>steamprofilecall({{ steamprofile.profile_id }}, {{ loop.index }})</script>
+                <script>setInterval(function () {
+                        steamprofilecall({{ steamprofile.profile_id }}, {{ loop.index }})
+                    }, {{ steamprofile.timer }} * 1000
+                    )</script>
+            {% endfor %}
+        </div>
+
+        <div class="steam_recent_games_class">
+            <div class="title">
+                widget steam recents games
+            </div>
+            {% for steamrecentgame in steamrecentgames %}
+                <div id="div_widget" class="steam_recent_games_display">
+                    <div>
+                        <div class="steam_recent_games_align">
+                            <div>
+                                <div class="sub_cat">
+                                nom du jeu:
+                                </div>
+                                <div id="steamrecentgame-name-{{ loop.index }}"></div>
+                            </div>
+                            <div>
+                                <div class="sub_cat">
+                                Id du jeu:
+                                </div>
+                                <div id="steamrecentgame-id-{{ loop.index }}"></div>
+                            </div>
+                            <div>
+                                <div class="sub_cat">
+                                temps de jeu sur les 2 dernières semaines:
+                                </div>
+                                <div id="steamrecentgame-playtime-{{ loop.index }}"></div>
+                                minutes
+                            </div>
+                        </div>
+                    </div>
+                    <a href="{{ path('delete_steamrecentgames_widget', {'id': steamrecentgame.id_widget}) }}">delete
+                        widget</a>
+                </div>
+                <script>steamrecentgamescall({{ steamrecentgame.profile_id }}, {{ loop.index }})</script>
+                <script>setInterval(function () {
+                        steamrecentgamescall({{ steamrecentgame.profile_id }}, {{ loop.index }})
+                    }, {{ steamrecentgame.timer }} * 1000
+                    )</script>
+            {% endfor %}
+        </div>
+
+        <div class="devise_conversion_class">
+            <div class="title">
+                Devise Conversion
+            </div>
+            {% for deviseconvert in deviseconversion %}
+                <div id="div_widget" class="devise_conversion_display">
+                    <div>
+                        <div class="sub_cat">
+                        devise source: 
+                        </div>
+                        {{ deviseconvert.devise_target }}
+                    </div>
+                    <div>
+                        <div class="sub_cat">
+                        devise ciblée: 
+                        </div>
+                        {{ deviseconvert.devise_format }}
+                    </div>
+                    <div>
+                        <div class="sub_cat">
+                        quantité de départ: 
+                        </div>
+                        {{ deviseconvert.quantity }}
+                    </div>
+                    <div>
+                        <div class="sub_cat">
+                        montant obtenu:
+                        </div>
+                        <div id="deviseconversion-amount-{{ loop.index }}"></div>
+                    </div>
+                    <a href="{{ path('delete_deviseconversion_widget', {'id': deviseconvert.id_widget}) }}">delete
+                        widget</a>
+                </div>
+                <script>deviseconversioncall('{{ deviseconvert.devise_target }}', '{{ deviseconvert.devise_format }}', {{ deviseconvert.quantity }}, {{ loop.index }} )</script>
+                <script>setInterval(function () {
+                        deviseconversioncall('{{ deviseconvert.devise_target }}', '{{ deviseconvert.devise_format }}', {{ deviseconvert.quantity }}, {{ loop.index }} )
+                    }, {{ deviseconvert.timer }} * 1000
+                    )</script>
+            {% endfor %}
+        </div>
+
+        <div class="youtube_video_class">
+            <div class="title">
+                youtube video
+            </div>
+            {% for youtubevideo in youtubevideos %}
+                <div id="div_widget" class="youtube_video_display">
+                    <div>
+                        <div>
+                            <div class="sub_cat">
+                            titre de la vidéo: 
+                            </div>
+                            <div id="youtubevideo-title-{{ loop.index }}"></div>
+                        </div>
+                        <div>
+                            <div class="sub_cat">
+                            nombre de vues: 
+                            </div>
+                            <div id="youtubevideo-view-{{ loop.index }}"></div>
+                        </div>
+                        <div>
+                            <div class="sub_cat">
+                            nombre de likes: 
+                            </div>
+                            <div id="youtubevideo-like-{{ loop.index }}"></div>
+                        </div>
+                        <div style="height: 150px; overflow: hidden">
+                            <div class="sub_cat">
+                            description: 
+                            </div>
+                            <div id="youtubevideo-description-{{ loop.index }}"></div>
+                        </div>
+                    </div>
+                    <a href="{{ path('delete_youtubevideo_widget', {'id': youtubevideo.id_widget}) }}">delete
+                        widget</a>
+                </div>
+                <script>youtubevideocall('{{ youtubevideo.video_id }}', {{ loop.index }})</script>
+            {% endfor %}
+        </div>
+        <div style="margin: 20px"></div>
+    </div>
+
+{% endblock %}
+

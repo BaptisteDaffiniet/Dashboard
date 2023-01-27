@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}page administration{% endblock %}
+
+{% block body %}
+    <div>
+        <h1>
+            Bienvenue sur la page administration
+        </h1>
+    </div>
+    <div>
+        <table>
+            <tr>
+                <td>
+                    id
+                </td>
+                <td>
+                    name
+                </td>
+                <td>
+                    email
+                </td>
+                <td></td>
+            </tr>
+            {% for user in users %}
+                <tr>
+                    <td>
+                        {{ user.id }}
+                    </td>
+                    <td>
+                        {{ user.username }}
+                    </td>
+                    <td>
+                        {{ user.mail }}
+                    </td>
+                    <td>
+                        <a href="{{ path('manage_user', {'id': user.id}) }}">gérer l'utilisateur</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

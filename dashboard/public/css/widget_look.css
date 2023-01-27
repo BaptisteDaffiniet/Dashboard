@@ -1,0 +1,108 @@
+.weather_class {
+    height: 235px;
+    width: auto;
+    overflow-x: auto;
+}
+
+.weather_display {
+    height: 200px;
+    width: 250px;
+    background: lightgrey;
+    display: inline-block;
+    margin: 5px 2%;
+}
+
+
+.steam_app_new_class {
+    height: 305px;
+    width: auto;
+    overflow-x: auto;
+}
+
+.steam_app_new_display {
+    height: 270px;
+    width: 450px;
+    background: lightgrey;
+    display: inline-block;
+    margin: 5px 2%;
+}
+
+
+.steam_profile_class {
+    height: 275px;
+    width: auto;
+    overflow-x: auto;
+}
+
+.steam_profile_display {
+    height: 220px;
+    width: 250px;
+    background: lightgrey;
+    display: inline-block;
+    margin: 5px 2%;
+}
+
+.steam_recent_games_class {
+    height: 235px;
+    width: auto;
+    overflow-x: auto;
+}
+
+.steam_recent_games_display {
+    height: 190px;
+    width: auto;
+    background: lightgrey;
+    display: inline-block;
+    margin: 5px 2%;
+}
+
+.steam_recent_games_align {
+    display: inline-block;
+    margin: auto 5px;
+}
+
+.devise_conversion_class {
+    height: 235px;
+    width: auto;
+    overflow-x: auto;
+}
+
+.devise_conversion_display {
+    height: 190px;
+    width: auto;
+    background: lightgrey;
+    display: inline-block;
+    margin: 5px 2%;
+}
+
+.youtube_video_class {
+    height: 395px;
+    width: auto;
+    overflow-x: auto;
+}
+
+.youtube_video_display {
+    height: 350px;
+    width: 400px;
+    background: lightgrey;
+    display: inline-block;
+    margin: 5px 2%;
+    overflow: hidden;
+}
+
+.title {
+    height: 50px;
+    width: auto;
+    margin: 10px auto 10px auto;
+    text-align: center;
+    font: small-caps bold 24px/1 sans-serif;
+}
+
+.main_div {
+    height: 100vh;
+    overflow: auto;
+}
+
+.sub_cat {
+    font-weight: bold;
+}

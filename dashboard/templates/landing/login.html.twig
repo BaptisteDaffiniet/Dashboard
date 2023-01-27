@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page d'acceuil{% endblock %}
+
+{% block body %}
+    <h1>Bienvenu sur le projet Dashboard</h1>
+    <div>
+        <a href="{{ path('google_connect') }}">Authentification google</a>
+        <a href="{{ path('facebook_connect') }}">Authentification facebook</a>
+        <a href="{{ path('app_login') }}">vous possedez deja un compte ?</a>
+    </div>
+    <div>
+        <a href="{{ path('register') }}">pas encore membre du site ? </a>
+    </div>
+{% endblock %}

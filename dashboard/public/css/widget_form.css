@@ -1,0 +1,26 @@
+.title {
+    height: 50px;
+    width: auto;
+    margin: 10px auto 10px auto;
+    text-align: center;
+    font: small-caps bold 24px/1 sans-serif;
+}
+
+.form_display {
+    background: lightgrey;
+    height: 300px;
+    width: 450px;
+    display: inline-block;
+    margin: 10px 50px;
+    border-radius: 10px;
+}
+
+.sub_title {
+    height: 30px;
+    width: auto;
+    text-align: center;
+    color: black;
+}
+
+.form_field {
+}

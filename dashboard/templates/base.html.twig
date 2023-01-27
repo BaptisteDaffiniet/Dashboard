@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {% block stylesheets %}
+        <link href="{{ asset('css/base.css') }}" type="text/css" rel="stylesheet">
+    {% endblock %}
+</head>
+<body>
+{% if app.user != null %}
+    <div class="menu">
+        <h1 style="color: #0a0a0a; text-align: center">Dashboard</h1>
+        <div>connected as {{ app.user.username }}</div>
+        <div>
+            <a href="{{ path('widgets') }}">Dashboard</a>
+        </div>
+        <div>
+            <a href="{{ path('services') }}">Services</a>
+        </div>
+        <div>
+            <a href="{{ path('manage_widgets') }}">Widgets</a>
+        </div>
+        {% if is_granted("ROLE_ADMIN") %}
+            <div>
+                <a href="{{ path('administration') }}">administration</a>
+            </div>
+        {% endif %}
+        <div>
+            <a href="{{ path('app_logout') }}">déconnexion</a>
+        </div>
+    </div>
+    <div class="body_corps">
+{% endif %}
+        {% block javascripts %}
+        {% endblock %}
+            {% block body %}{% endblock %}
+        </div>
+
+</body>
+</html>

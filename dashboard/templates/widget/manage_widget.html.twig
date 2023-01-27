@@ -1,0 +1,170 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des widgets{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('css/widget_form.css') }}" type="text/css" rel="stylesheet">
+{% endblock %}
+
+
+{% block body %}
+    <div class="title">
+        Liste de tout les widgets implémentés pouvant être utilisés
+    </div>
+
+    <div class="form_display">
+        <div class="sub_title">
+            weather
+        </div>
+        <div>
+            {{ form_start(form_weather) }}
+            <div>
+                {{ form_row(form_weather.town, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <div>
+                {{ form_label(form_weather.timer) }}
+                {{ form_widget(form_weather.timer, {'attr': {'class': 'form-control'}}) }}
+                <div>
+                    {{ form_errors(form_weather.timer) }}
+                </div>
+            </div>
+            <div>
+                <button type="submit">
+                    ajouter le widget
+                </button>
+            </div>
+            {{ form_end(form_weather) }}
+        </div>
+    </div>
+
+    <div class="form_display">
+        <div class="sub_title">
+            steam news
+        </div>
+        <div>
+            {{ form_start(form_steamappnew) }}
+            <div>
+                {{ form_row(form_steamappnew.game_id, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <div>
+                {{ form_label(form_steamappnew.timer) }}
+                {{ form_widget(form_steamappnew.timer, {'attr': {'class': 'form-control'}}) }}
+                <div>
+                    {{ form_errors(form_steamappnew.timer) }}
+                </div>
+            </div>
+            <div>
+                <button type="submit">
+                    ajouter le widget
+                </button>
+            </div>
+            {{ form_end(form_steamappnew) }}
+        </div>
+    </div>
+
+    <div class="form_display">
+        <div class="sub_title">
+            steam profile
+        </div>
+        <div>
+            {{ form_start(form_steamprofile) }}
+            <div>
+                {{ form_row(form_steamprofile.profileid, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <div>
+                {{ form_label(form_steamprofile.timer) }}
+                {{ form_widget(form_steamprofile.timer, {'attr': {'class': 'form-control'}}) }}
+                <div>
+                    {{ form_errors(form_steamprofile.timer) }}
+                </div>
+            </div>
+            <div>
+                <button type="submit">
+                    ajouter le widget
+                </button>
+            </div>
+            {{ form_end(form_steamprofile) }}
+        </div>
+    </div>
+
+    <div class="form_display">
+        <div class="sub_title">
+            steam recent games
+        </div>
+        <div>
+            {{ form_start(form_steamrecentgames) }}
+            <div>
+                {{ form_row(form_steamrecentgames.profileid, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <div>
+                {{ form_label(form_steamrecentgames.timer) }}
+                {{ form_widget(form_steamrecentgames.timer, {'attr': {'class': 'form-control'}}) }}
+                <div>
+                    {{ form_errors(form_steamrecentgames.timer) }}
+                </div>
+            </div>
+            <div>
+                <button type="submit">
+                    ajouter le widget
+                </button>
+            </div>
+            {{ form_end(form_steamrecentgames) }}
+        </div>
+    </div>
+
+    <div class="form_display">
+        <div class="sub_title">
+            devise conversion
+        </div>
+        <div>
+            {{ form_start(form_deviseconversion) }}
+            <div>
+                {{ form_row(form_deviseconversion.devise_target, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <div>
+                {{ form_row(form_deviseconversion.devise_format, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <div>
+                {{ form_row(form_deviseconversion.quantity, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <div>
+                {{ form_label(form_deviseconversion.timer) }}
+                {{ form_widget(form_deviseconversion.timer, {'attr': {'class': 'form-control'}}) }}
+                <div>
+                    {{ form_errors(form_deviseconversion.timer) }}
+                </div>
+            </div>
+            <div>
+                <button type="submit">
+                    ajouter le widget
+                </button>
+            </div>
+            {{ form_end(form_deviseconversion) }}
+        </div>
+    </div>
+
+    <div class="form_display">
+        <div class="sub_title">
+            youtube video
+        </div>
+        <div>
+            {{ form_start(form_youtubevideo) }}
+            <div>
+                {{ form_row(form_youtubevideo.video_id, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <div>
+                {{ form_label(form_youtubevideo.timer) }}
+                {{ form_widget(form_youtubevideo.timer, {'attr': {'class': 'form-control'}}) }}
+                <div>
+                    {{ form_errors(form_youtubevideo.timer) }}
+                </div>
+            </div>
+            <div>
+                <button type="submit">
+                    ajouter le widget
+                </button>
+            </div>
+            {{ form_end(form_youtubevideo) }}
+        </div>
+    </div>
+{% endblock %}
